@@ -77,9 +77,29 @@ The result should be a charming cartoon pet character that clearly resembles the
         const result = await model.generateContent([prompt, ...imageParts]);
         const response = await result.response;
         
+        // Debug: Log the full response structure
+        console.log('=== GEMINI RESPONSE DEBUG ===');
+        console.log('Response structure:', JSON.stringify({
+            candidates: response.candidates?.length || 0,
+            hasContent: response.candidates?.[0]?.content ? true : false,
+            partsCount: response.candidates?.[0]?.content?.parts?.length || 0,
+            parts: response.candidates?.[0]?.content?.parts?.map(part => Object.keys(part)) || []
+        }, null, 2));
+        
         // Extract the generated image from the response
         if (response.candidates && response.candidates[0] && response.candidates[0].content) {
             const parts = response.candidates[0].content.parts;
+            
+            // Debug: Log what's actually in the parts
+            console.log('=== RESPONSE PARTS DEBUG ===');
+            parts.forEach((part, index) => {
+                console.log(`Part ${index}:`, {
+                    hasText: !!part.text,
+                    textPreview: part.text ? part.text.substring(0, 100) + '...' : null,
+                    hasInlineData: !!part.inlineData,
+                    inlineDataType: part.inlineData?.mimeType || null
+                });
+            });
             
             // Find the image part in the response
             const imagePart = parts.find(part => part.inlineData && part.inlineData.mimeType.startsWith('image/'));
