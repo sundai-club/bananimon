@@ -37,9 +37,11 @@ Critical Requirements:
 - Transform THIS PERSON into a 10-year-old semi-furry ${selectedAnimal.name.toLowerCase()} while keeping their face clearly recognizable
 - Show full body (head to feet) in upright bipedal standing pose
 - MUST preserve THIS PERSON'S unique facial features, eye shape, eye color, and bone structure but make them look younger
+- MUST maintain the same gender as the person in the photo - analyze the person's gender and keep it consistent in the character
 
 FACE/HEAD (10-year-old version):
 - Keep THIS PERSON'S recognizable facial features but make them look like a 10-year-old child
+- Maintain the same gender characteristics as the original person (masculine or feminine features)
 - Softer, more youthful facial features with larger eyes and rounder face
 - Add small ${selectedAnimal.name.toLowerCase()} muzzle/snout (subtle, not pronounced)
 - Replace human ears with functional ${selectedAnimal.name.toLowerCase()} ears
@@ -47,6 +49,7 @@ FACE/HEAD (10-year-old version):
 
 BODY (child proportions):
 - Child body proportions - smaller and more petite than adult with larger head relative to body
+- Body shape should reflect the same gender as the person in the photo
 - Mostly human torso with subtle ${selectedAnimal.name.toLowerCase()} modifications
 - Slight digitigrade leg stance (hint of animal posture)
 - Paw-like hands and feet with visible paw pads
@@ -58,7 +61,7 @@ COLORING:
 - Human skin tone on non-furred areas
 - Bright, vibrant cartoon colors with simple shading
 
-The result should be a balanced semi-furry child character - clearly THIS PERSON as a 10-year-old but with integrated ${selectedAnimal.name.toLowerCase()} features that feel natural, not costume-like.`;
+The result should be a balanced semi-furry child character - clearly THIS PERSON as a 10-year-old of the same gender but with integrated ${selectedAnimal.name.toLowerCase()} features that feel natural, not costume-like.`;
 
         // Log the prompt to console
         console.log('=== GENERATION PROMPT ===');
