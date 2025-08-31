@@ -209,10 +209,10 @@ app.post('/api/rest-schedule', async (req, res) => {
 });
 
 // Legacy endpoints for backwards compatibility
-app.post('/generate-pet', generateBananimonImages);
-app.post('/api/generate-bananimon', generateBananimonImages);
+app.post('/generate-pet', (req, res) => generateBananimonImages(req, res, 4)); // Generate 4 for legacy
+app.post('/api/generate-bananimon', (req, res) => generateBananimonImages(req, res, 3)); // Generate 3 for onboarding
 
-async function generateBananimonImages(req, res) {
+async function generateBananimonImages(req, res, numImages = 3) {
     try {
         const { userImage, selectedAnimal, selectedAge } = req.body;
         
@@ -249,10 +249,10 @@ async function generateBananimonImages(req, res) {
             }
         ];
 
-        // Generate 3 images for selection
-        const generationPromises = Array(3).fill().map(async (_, index) => {
+        // Generate images for selection
+        const generationPromises = Array(numImages).fill().map(async (_, index) => {
             try {
-                console.log(`🎨 Generating variant ${index + 1}/3...`);
+                console.log(`🎨 Generating variant ${index + 1}/${numImages}...`);
                 const result = await model.generateContent([prompt, ...imageParts]);
                 const response = await result.response;
                 
@@ -262,15 +262,15 @@ async function generateBananimonImages(req, res) {
                     
                     if (imagePart && imagePart.inlineData && imagePart.inlineData.data) {
                         const generatedImage = `data:${imagePart.inlineData.mimeType};base64,${imagePart.inlineData.data}`;
-                        console.log(`✅ Successfully generated variant ${index + 1}/3`);
+                        console.log(`✅ Successfully generated variant ${index + 1}/${numImages}`);
                         return generatedImage;
                     }
                 }
                 
-                console.log(`❌ Failed to generate variant ${index + 1}/3`);
+                console.log(`❌ Failed to generate variant ${index + 1}/${numImages}`);
                 return null;
             } catch (error) {
-                console.error(`❌ Error in generation ${index + 1}/3:`, error.message);
+                console.error(`❌ Error in generation ${index + 1}/${numImages}:`, error.message);
                 return null;
             }
         });
@@ -282,7 +282,7 @@ async function generateBananimonImages(req, res) {
             throw new Error('Failed to generate any images');
         }
         
-        console.log(`✅ Successfully generated ${validImages.length}/3 Bananimon variants`);
+        console.log(`✅ Successfully generated ${validImages.length}/${numImages} Bananimon variants`);
         
         res.json({ 
             generatedImages: validImages,
