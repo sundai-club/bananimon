@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bananimon - AI Pet Crossbreed Generator</title>
-    <meta name="description" content="Create magical AI-generated pets by combining your photo with your favorite animal. Generate unique crossbreed creatures using advanced AI technology.">
+    <title>Bananimon - AI Pet Generator</title>
+    <meta name="description" content="Create magical AI-generated pets by combining your photo with your favorite animal. Generate unique hybrid characters using advanced AI technology.">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Bananimon - AI Pet Crossbreed Generator">
-    <meta property="og:description" content="Create magical AI-generated pets by combining your photo with your favorite animal. Generate unique crossbreed creatures using advanced AI technology.">
+    <meta property="og:title" content="Bananimon - AI Pet Generator">
+    <meta property="og:description" content="Create magical AI-generated pets by combining your photo with your favorite animal. Generate unique hybrid characters using advanced AI technology.">
     <meta property="og:image" content="/og-image.png">
     <meta property="og:url" content="https://bananimon.onrender.com">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Bananimon - AI Pet Crossbreed Generator">
-    <meta name="twitter:description" content="Create magical AI-generated pets by combining your photo with your favorite animal. Generate unique crossbreed creatures using advanced AI technology.">
+    <meta name="twitter:title" content="Bananimon - AI Pet Generator">
+    <meta name="twitter:description" content="Create magical AI-generated pets by combining your photo with your favorite animal. Generate unique hybrid characters using advanced AI technology.">
     <meta name="twitter:image" content="/og-image.png">
     
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Pet Crossbreed Generator</h1>
+        <h1>AI Pet Generator</h1>
         
         <!-- Camera Section -->
         <div class="camera-section">
@@ -45,6 +45,19 @@
             <h2>Choose Your Animal</h2>
             <div class="animal-grid" id="animalGrid">
                 <!-- 4x4 grid of animals -->
+            </div>
+            
+            <!-- Age Slider -->
+            <div class="age-slider-section">
+                <h3>Character Age</h3>
+                <div class="slider-container">
+                    <label for="ageSlider">0</label>
+                    <input type="range" id="ageSlider" min="0" max="100" value="10" class="age-slider">
+                    <label for="ageSlider">100</label>
+                </div>
+                <div class="age-display">
+                    Age: <span id="ageValue">10</span> years old
+                </div>
             </div>
         </div>
 

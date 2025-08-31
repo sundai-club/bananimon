@@ -1,7 +1,7 @@
 {
-  "name": "pet-crossbreed-generator",
+  "name": "ai-pet-generator",
   "version": "1.0.0",
-  "description": "A web app that generates crossbreed pets using selfies and AI",
+  "description": "A web app that generates AI pets using selfies and AI",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

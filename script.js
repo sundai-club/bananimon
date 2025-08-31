@@ -15,10 +15,13 @@ class PetGenerator {
         this.resultGrid = document.getElementById('resultGrid');
         this.regenerateBtn = document.getElementById('regenerate');
         this.generateAnotherBtn = document.getElementById('generateAnother');
+        this.ageSlider = document.getElementById('ageSlider');
+        this.ageValue = document.getElementById('ageValue');
 
         this.stream = null;
         this.capturedImageData = null;
         this.selectedAnimal = null;
+        this.selectedAge = 10;
 
         this.animals = [
             { name: 'Cat', image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&h=200&fit=crop&crop=face', description: 'Playful feline' },
@@ -72,6 +75,7 @@ class PetGenerator {
         this.generateBtn.addEventListener('click', () => this.generatePet());
         this.regenerateBtn.addEventListener('click', () => this.regenerate());
         this.generateAnotherBtn.addEventListener('click', () => this.reset());
+        this.ageSlider.addEventListener('input', () => this.updateAge());
     }
 
     async startCamera() {
@@ -129,6 +133,11 @@ class PetGenerator {
         this.checkIfReadyToGenerate();
     }
 
+    updateAge() {
+        this.selectedAge = parseInt(this.ageSlider.value);
+        this.ageValue.textContent = this.selectedAge;
+    }
+
     checkIfReadyToGenerate() {
         if (this.capturedImageData && this.selectedAnimal) {
             this.generateBtn.style.display = 'inline-block';
@@ -147,7 +156,8 @@ class PetGenerator {
                 },
                 body: JSON.stringify({
                     userImage: this.capturedImageData,
-                    selectedAnimal: this.selectedAnimal
+                    selectedAnimal: this.selectedAnimal,
+                    selectedAge: this.selectedAge
                 })
             });
 
@@ -210,6 +220,9 @@ class PetGenerator {
     reset() {
         this.capturedImageData = null;
         this.selectedAnimal = null;
+        this.selectedAge = 10;
+        this.ageSlider.value = 10;
+        this.ageValue.textContent = '10';
         
         // Reset to initial state - camera section, animal section, and generate section visible
         document.querySelector('.camera-section').style.display = 'block';
