@@ -29,20 +29,21 @@ app.post('/generate-pet', async (req, res) => {
         const animalImageBuffer = await animalImageResponse.arrayBuffer();
         const animalImageBase64 = Buffer.from(animalImageBuffer).toString('base64');
         
-        const prompt = `Create a full-body cartoon character of the person from Image A as a cute child (age 5-10) with subtle ${selectedAnimal.name.toLowerCase()} traits from Image B.
+        const prompt = `Create a full-body furry anthropomorphic ${selectedAnimal.name.toLowerCase()} character of THIS SPECIFIC PERSON from Image A.
 
-Style: Cel-shaded cartoon with bold colors, clean outlines, and game-ready character design.
+Style: Cel-shaded cartoon with bold colors, clean outlines, and furry character design.
 
-Requirements:
-- Show the full body character (head to feet) in a standing pose
-- Keep the person's face, eyes, hair color, and identity clearly recognizable
-- Transform into a young child with bigger eyes, rounder face, and softer features
-- Add subtle ${selectedAnimal.name.toLowerCase()} characteristics appropriate to that animal (ears, markings, colors, etc.)
-- Use bright, vibrant colors with simple cartoon shading
-- 70% human, 30% animal characteristics
-- Child-like proportions with larger head relative to body
+Critical Requirements:
+- Transform THIS PERSON into a furry ${selectedAnimal.name.toLowerCase()} character while keeping their face clearly recognizable
+- Show full body (head to feet) in standing pose with human-like posture
+- MUST preserve THIS PERSON'S unique facial features, eye shape, eye color, and facial structure within the furry design
+- Add full ${selectedAnimal.name.toLowerCase()} characteristics: proper animal ears, muzzle/snout, fur covering, tail, paws/hands, and species-appropriate colors
+- Use bright, vibrant furry character colors with simple cartoon shading
+- Make it clearly THIS PERSON as a furry ${selectedAnimal.name.toLowerCase()} - recognizable face but full animal body features
+- Cute, appealing furry character design that maintains human personality in animal form
+- Include appropriate ${selectedAnimal.name.toLowerCase()} markings, patterns, and physical traits
 
-The result should be an adorable full-body child character with just a hint of ${selectedAnimal.name.toLowerCase()} features.`;
+The result should be THIS PERSON transformed into an adorable furry ${selectedAnimal.name.toLowerCase()} character with their recognizable facial identity preserved.`;
 
         // Log the prompt to console
         console.log('=== GENERATION PROMPT ===');

@@ -40,6 +40,10 @@ h2 {
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
+.generate-section {
+    text-align: center;
+}
+
 .camera-section h2, .animal-section h2, .result-section h2 {
     color: #333;
 }
@@ -207,18 +211,9 @@ h2 {
 }
 
 .result-card {
-    position: relative;
-    cursor: pointer;
     border-radius: 15px;
     overflow: hidden;
-    transition: all 0.3s ease;
-    border: 3px solid transparent;
-}
-
-.result-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    border-color: #667eea;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .result-option {
@@ -228,54 +223,6 @@ h2 {
     display: block;
 }
 
-.result-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.result-card:hover .result-overlay {
-    opacity: 1;
-}
-
-.select-btn {
-    background: linear-gradient(45deg, #11998e, #38ef7d);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.select-btn:hover {
-    transform: scale(1.1);
-}
-
-.final-image {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-#finalImage {
-    width: 100%;
-    max-width: 600px;
-    height: 500px;
-    object-fit: cover;
-    border-radius: 20px;
-    border: 3px solid #667eea;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
 
 @media (max-width: 768px) {
     .container {

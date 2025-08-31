@@ -12,10 +12,7 @@ class PetGenerator {
         this.generateBtn = document.getElementById('generatePet');
         this.loading = document.getElementById('loading');
         this.resultSection = document.getElementById('resultSection');
-        this.resultImage = document.getElementById('resultImage');
         this.resultGrid = document.getElementById('resultGrid');
-        this.finalResult = document.getElementById('finalResult');
-        this.finalImage = document.getElementById('finalImage');
         this.generateAnotherBtn = document.getElementById('generateAnother');
 
         this.stream = null;
@@ -182,21 +179,10 @@ class PetGenerator {
             const imageCard = document.createElement('div');
             imageCard.className = 'result-card';
             imageCard.innerHTML = `
-                <img src="${imageSrc}" alt="Generated pet option ${index + 1}" class="result-option">
-                <div class="result-overlay">
-                    <button class="select-btn">Choose This One!</button>
-                </div>
+                <img src="${imageSrc}" alt="Generated pet ${index + 1}" class="result-option">
             `;
-            
-            imageCard.addEventListener('click', () => this.selectFinalImage(imageSrc));
             this.resultGrid.appendChild(imageCard);
         });
-    }
-
-    selectFinalImage(imageSrc) {
-        this.finalImage.src = imageSrc;
-        this.resultGrid.parentElement.style.display = 'none';
-        this.finalResult.style.display = 'block';
     }
 
     reset() {
@@ -208,7 +194,6 @@ class PetGenerator {
         document.querySelector('.animal-section').style.display = 'block';
         document.querySelector('.generate-section').style.display = 'block';
         this.resultSection.style.display = 'none';
-        this.finalResult.style.display = 'none';
         
         // Reset result grid
         this.resultGrid.innerHTML = '';
