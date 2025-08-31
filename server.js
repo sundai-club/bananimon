@@ -29,16 +29,17 @@ app.post('/generate-pet', async (req, res) => {
         const animalImageBuffer = await animalImageResponse.arrayBuffer();
         const animalImageBase64 = Buffer.from(animalImageBuffer).toString('base64');
         
-        const prompt = `Create a cartoon version of the human from Image A with very subtle ${selectedAnimal.name.toLowerCase()} characteristics from Image B. Output non-photorealistic, cel-shaded render with large readable silhouette, game-ready crop, no logos/IP, consistent likeness, bold color blocks.
+        const prompt = `Create a cartoon version of the human from Image A as a 5-10 year old child with very subtle ${selectedAnimal.name.toLowerCase()} characteristics from Image B. Output non-photorealistic, cel-shaded render with large readable silhouette, game-ready crop, no logos/IP, consistent likeness, bold color blocks.
 
-IMPORTANT: This should be 95% human, 5% animal - the person should be clearly recognizable as themselves.
+IMPORTANT: This should be 95% human, 5% animal - the person should be clearly recognizable as themselves but as a young child (5-10 years old).
 
 Character design:
 - MAINTAIN the exact facial structure, features, and likeness of the person from Image A
-- Keep their human skin tone, eye color, hair color, and facial proportions
+- Transform them into a 5-10 year old child version of themselves with younger facial features, bigger eyes, rounder face, softer features
+- Keep their human skin tone, eye color, hair color, and core facial identity
 - Add only MINIMAL ${selectedAnimal.name.toLowerCase()} features: subtle ear shape changes, small nose adjustments, or minor markings
-- Make them look like a cute, younger cartoon version of themselves
-- Keep completely human body proportions and limbs
+- Use child-like proportions: larger head relative to body, bigger eyes, softer features
+- Keep completely human body proportions appropriate for a young child
 
 Visual style requirements:
 - Cel-shaded, cartoon anime/manga style rendering
@@ -54,7 +55,7 @@ Subtle animal touches only:
 - Minor color accent from the ${selectedAnimal.name.toLowerCase()} (like hair highlights)
 - Keep it so subtle that they still look like the same person
 
-The result should look like the person from the photo as a cute cartoon character with barely noticeable ${selectedAnimal.name.toLowerCase()} touches - they should be immediately recognizable as themselves.`;
+The result should look like the person from the photo as a cute 5-10 year old child cartoon character with barely noticeable ${selectedAnimal.name.toLowerCase()} touches - they should be immediately recognizable as a younger version of themselves.`;
 
         // Log the prompt to console
         console.log('=== GENERATION PROMPT ===');
