@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Crossbreed Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Pet Crossbreed Generator</h1>
+        
+        <!-- Camera Section -->
+        <div class="camera-section">
+            <h2>Take Your Selfie</h2>
+            <video id="camera" autoplay></video>
+            <canvas id="canvas" style="display: none;"></canvas>
+            <div class="camera-controls">
+                <button id="startCamera">Start Camera</button>
+                <button id="capturePhoto" style="display: none;">Capture Photo</button>
+                <button id="retakePhoto" style="display: none;">Retake</button>
+            </div>
+            <div class="captured-photo" id="capturedPhoto" style="display: none;">
+                <img id="selfiePreview" alt="Your selfie">
+            </div>
+        </div>
+
+        <!-- Animal Selection Grid -->
+        <div class="animal-section">
+            <h2>Choose Your Animal</h2>
+            <div class="animal-grid" id="animalGrid">
+                <!-- 4x4 grid of animals -->
+            </div>
+        </div>
+
+        <!-- Generate Section -->
+        <div class="generate-section">
+            <button id="generatePet" style="display: none;">Generate My Pet!</button>
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Creating your magical pet...</p>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div class="result-section" id="resultSection" style="display: none;">
+            <h2>Your New Pet!</h2>
+            <div class="result-image">
+                <img id="resultImage" alt="Generated pet">
+            </div>
+            <button id="generateAnother">Generate Another</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
