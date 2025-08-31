@@ -29,30 +29,32 @@ app.post('/generate-pet', async (req, res) => {
         const animalImageBuffer = await animalImageResponse.arrayBuffer();
         const animalImageBase64 = Buffer.from(animalImageBuffer).toString('base64');
         
-        const prompt = `Fuse subject from Image A (the human selfie) with animal traits from Image B (${selectedAnimal.name.toLowerCase()}). Output non-photorealistic, cel-shaded render with large readable silhouette, game-ready crop, no logos/IP, consistent likeness, bold color blocks.
+        const prompt = `Create a cartoon version of the human from Image A with very subtle ${selectedAnimal.name.toLowerCase()} characteristics from Image B. Output non-photorealistic, cel-shaded render with large readable silhouette, game-ready crop, no logos/IP, consistent likeness, bold color blocks.
 
-Create a stylized cartoon pet character that combines:
-- The facial structure, features, and likeness of the person from Image A
-- Key animal characteristics from the ${selectedAnimal.name.toLowerCase()} in Image B
-- Make it look like a cute, baby/toddler version of the person as a ${selectedAnimal.name.toLowerCase()}
-
-Visual style requirements:
-- Cel-shaded, non-photorealistic cartoon rendering
-- Bold, flat color blocks with clean edges
-- Large, clear silhouette that reads well at small sizes
-- Game-ready character design aesthetic
-- Bright, saturated colors
-- Simple but expressive features
+IMPORTANT: This should be 95% human, 5% animal - the person should be clearly recognizable as themselves.
 
 Character design:
-- Maintain the person's core facial features and eye color
-- Add prominent ${selectedAnimal.name.toLowerCase()} traits (ears, nose, markings, fur patterns)
-- Cute, chibi-style proportions (large head, small body)
-- Expressive, friendly cartoon eyes
-- No realistic textures - use flat cartoon shading
-- Clean, simple design suitable for mobile games
+- MAINTAIN the exact facial structure, features, and likeness of the person from Image A
+- Keep their human skin tone, eye color, hair color, and facial proportions
+- Add only MINIMAL ${selectedAnimal.name.toLowerCase()} features: subtle ear shape changes, small nose adjustments, or minor markings
+- Make them look like a cute, younger cartoon version of themselves
+- Keep completely human body proportions and limbs
 
-The result should be a charming cartoon pet character that clearly resembles the person but as a stylized ${selectedAnimal.name.toLowerCase()}.`;
+Visual style requirements:
+- Cel-shaded, cartoon anime/manga style rendering
+- Bold, flat color blocks with clean outlines
+- Large, clear silhouette that reads well at small sizes
+- Bright, vibrant colors with good contrast
+- Clean, simple shading without complex textures
+- Game character/avatar aesthetic
+
+Subtle animal touches only:
+- Maybe slightly pointed ear tips (not full animal ears)
+- Small whisker marks or gentle facial markings
+- Minor color accent from the ${selectedAnimal.name.toLowerCase()} (like hair highlights)
+- Keep it so subtle that they still look like the same person
+
+The result should look like the person from the photo as a cute cartoon character with barely noticeable ${selectedAnimal.name.toLowerCase()} touches - they should be immediately recognizable as themselves.`;
 
         // Log the prompt to console
         console.log('=== GENERATION PROMPT ===');
@@ -74,51 +76,53 @@ The result should be a charming cartoon pet character that clearly resembles the
             }
         ];
 
-        const result = await model.generateContent([prompt, ...imageParts]);
-        const response = await result.response;
-        
-        // Debug: Log the full response structure
-        console.log('=== GEMINI RESPONSE DEBUG ===');
-        console.log('Response structure:', JSON.stringify({
-            candidates: response.candidates?.length || 0,
-            hasContent: response.candidates?.[0]?.content ? true : false,
-            partsCount: response.candidates?.[0]?.content?.parts?.length || 0,
-            parts: response.candidates?.[0]?.content?.parts?.map(part => Object.keys(part)) || []
-        }, null, 2));
-        
-        // Extract the generated image from the response
-        if (response.candidates && response.candidates[0] && response.candidates[0].content) {
-            const parts = response.candidates[0].content.parts;
-            
-            // Debug: Log what's actually in the parts
-            console.log('=== RESPONSE PARTS DEBUG ===');
-            parts.forEach((part, index) => {
-                console.log(`Part ${index}:`, {
-                    hasText: !!part.text,
-                    textPreview: part.text ? part.text.substring(0, 100) + '...' : null,
-                    hasInlineData: !!part.inlineData,
-                    inlineDataType: part.inlineData?.mimeType || null
-                });
-            });
-            
-            // Find the image part in the response
-            const imagePart = parts.find(part => part.inlineData && part.inlineData.mimeType.startsWith('image/'));
-            
-            if (imagePart && imagePart.inlineData && imagePart.inlineData.data) {
-                const generatedImage = `data:${imagePart.inlineData.mimeType};base64,${imagePart.inlineData.data}`;
+        // Generate 4 images in parallel
+        console.log('🎨 Starting generation of 4 variants...');
+        const generationPromises = Array(4).fill().map(async (_, index) => {
+            try {
+                console.log(`🎨 Starting generation ${index + 1}/4...`);
+                const result = await model.generateContent([prompt, ...imageParts]);
+                const response = await result.response;
                 
-                console.log('✅ Successfully generated pet crossbreed image');
-                
-                res.json({ 
-                    generatedImage,
-                    prompt
-                });
-            } else {
-                throw new Error('No image data found in Gemini response');
+                // Extract the generated image from the response
+                if (response.candidates && response.candidates[0] && response.candidates[0].content) {
+                    const parts = response.candidates[0].content.parts;
+                    
+                    // Find the image part in the response
+                    const imagePart = parts.find(part => part.inlineData && part.inlineData.mimeType.startsWith('image/'));
+                    
+                    if (imagePart && imagePart.inlineData && imagePart.inlineData.data) {
+                        const generatedImage = `data:${imagePart.inlineData.mimeType};base64,${imagePart.inlineData.data}`;
+                        console.log(`✅ Successfully generated image ${index + 1}/4`);
+                        return generatedImage;
+                    } else {
+                        console.log(`❌ No image data in response ${index + 1}/4`);
+                        return null;
+                    }
+                } else {
+                    console.log(`❌ Invalid response format for generation ${index + 1}/4`);
+                    return null;
+                }
+            } catch (error) {
+                console.error(`❌ Error in generation ${index + 1}/4:`, error.message);
+                return null;
             }
-        } else {
-            throw new Error('Invalid response format from Gemini');
+        });
+
+        const generatedImages = await Promise.all(generationPromises);
+        const validImages = generatedImages.filter(img => img !== null);
+        
+        if (validImages.length === 0) {
+            throw new Error('Failed to generate any images');
         }
+        
+        console.log(`✅ Successfully generated ${validImages.length}/4 images`);
+        
+        res.json({ 
+            generatedImages: validImages,
+            prompt,
+            totalGenerated: validImages.length
+        });
         
     } catch (error) {
         console.error('❌ Error generating pet:', error);

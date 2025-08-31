@@ -13,6 +13,9 @@ class PetGenerator {
         this.loading = document.getElementById('loading');
         this.resultSection = document.getElementById('resultSection');
         this.resultImage = document.getElementById('resultImage');
+        this.resultGrid = document.getElementById('resultGrid');
+        this.finalResult = document.getElementById('finalResult');
+        this.finalImage = document.getElementById('finalImage');
         this.generateAnotherBtn = document.getElementById('generateAnother');
 
         this.stream = null;
@@ -156,7 +159,9 @@ class PetGenerator {
             const result = await response.json();
             
             this.loading.style.display = 'none';
-            this.resultImage.src = result.generatedImage;
+            
+            // Display multiple images in a grid for selection
+            this.displayImageGrid(result.generatedImages);
             this.resultSection.style.display = 'block';
             
             // Keep camera section and animal section visible, just hide the generate button
@@ -170,6 +175,30 @@ class PetGenerator {
         }
     }
 
+    displayImageGrid(images) {
+        this.resultGrid.innerHTML = '';
+        
+        images.forEach((imageSrc, index) => {
+            const imageCard = document.createElement('div');
+            imageCard.className = 'result-card';
+            imageCard.innerHTML = `
+                <img src="${imageSrc}" alt="Generated pet option ${index + 1}" class="result-option">
+                <div class="result-overlay">
+                    <button class="select-btn">Choose This One!</button>
+                </div>
+            `;
+            
+            imageCard.addEventListener('click', () => this.selectFinalImage(imageSrc));
+            this.resultGrid.appendChild(imageCard);
+        });
+    }
+
+    selectFinalImage(imageSrc) {
+        this.finalImage.src = imageSrc;
+        this.resultGrid.parentElement.style.display = 'none';
+        this.finalResult.style.display = 'block';
+    }
+
     reset() {
         this.capturedImageData = null;
         this.selectedAnimal = null;
@@ -179,6 +208,10 @@ class PetGenerator {
         document.querySelector('.animal-section').style.display = 'block';
         document.querySelector('.generate-section').style.display = 'block';
         this.resultSection.style.display = 'none';
+        this.finalResult.style.display = 'none';
+        
+        // Reset result grid
+        this.resultGrid.innerHTML = '';
         
         this.capturedPhoto.style.display = 'none';
         this.startCameraBtn.style.display = 'inline-block';
