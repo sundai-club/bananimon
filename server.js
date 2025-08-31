@@ -29,23 +29,25 @@ app.post('/generate-pet', async (req, res) => {
         const animalImageBuffer = await animalImageResponse.arrayBuffer();
         const animalImageBase64 = Buffer.from(animalImageBuffer).toString('base64');
         
-        const prompt = `Create a full-body semi-furry anthropomorphic ${selectedAnimal.name.toLowerCase()} character of THIS SPECIFIC PERSON from Image A.
+        const prompt = `Create a full-body semi-furry anthropomorphic ${selectedAnimal.name.toLowerCase()} character of THIS SPECIFIC PERSON from Image A as a 15-year-old teenager.
 
 Style: Cel-shaded cartoon with bold colors, clean outlines, and balanced anthro design.
 
 Critical Requirements:
-- Transform THIS PERSON into a semi-furry ${selectedAnimal.name.toLowerCase()} while keeping their face clearly recognizable
+- Transform THIS PERSON into a 15-year-old semi-furry ${selectedAnimal.name.toLowerCase()} while keeping their face clearly recognizable
 - Show full body (head to feet) in upright bipedal standing pose
-- MUST preserve THIS PERSON'S unique facial features, eye shape, eye color, and bone structure
+- MUST preserve THIS PERSON'S unique facial features, eye shape, eye color, and bone structure but make them look younger
 
-FACE/HEAD:
-- Keep human facial structure with THIS PERSON'S recognizable features
+FACE/HEAD (15-year-old version):
+- Keep THIS PERSON'S recognizable facial features but make them look like a 15-year-old teenager
+- Softer, more youthful facial features with slightly larger eyes and rounder face
 - Add small ${selectedAnimal.name.toLowerCase()} muzzle/snout (subtle, not pronounced)
 - Replace human ears with functional ${selectedAnimal.name.toLowerCase()} ears
-- Maintain human-like eye placement and expression
+- Maintain human-like eye placement and expression but with teenage characteristics
 
-BODY:
-- Mostly human torso proportions with subtle ${selectedAnimal.name.toLowerCase()} modifications
+BODY (teenage proportions):
+- Teenage body proportions - slightly smaller and more slender than adult
+- Mostly human torso with subtle ${selectedAnimal.name.toLowerCase()} modifications
 - Slight digitigrade leg stance (hint of animal posture)
 - Paw-like hands and feet with visible paw pads
 - Patchy fur coverage on forearms, lower legs, and cheeks
@@ -56,7 +58,7 @@ COLORING:
 - Human skin tone on non-furred areas
 - Bright, vibrant cartoon colors with simple shading
 
-The result should be a balanced semi-furry character - clearly THIS PERSON but with integrated ${selectedAnimal.name.toLowerCase()} features that feel natural, not costume-like.`;
+The result should be a balanced semi-furry teenage character - clearly THIS PERSON as a 15-year-old but with integrated ${selectedAnimal.name.toLowerCase()} features that feel natural, not costume-like.`;
 
         // Log the prompt to console
         console.log('=== GENERATION PROMPT ===');
