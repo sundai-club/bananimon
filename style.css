@@ -142,7 +142,7 @@ h2 {
     padding: 20px 10px 10px;
 }
 
-#generatePet, #generateAnother, #regenerateSame {
+#generatePet, #generateAnother, #regenerate {
     display: block;
     margin: 0 auto;
     background: linear-gradient(45deg, #11998e, #38ef7d);
@@ -156,7 +156,7 @@ h2 {
     transition: all 0.3s ease;
 }
 
-#generatePet:hover, #generateAnother:hover, #regenerateSame:hover {
+#generatePet:hover, #generateAnother:hover, #regenerate:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
@@ -169,8 +169,20 @@ h2 {
     margin-top: 20px;
 }
 
-#regenerateSame {
+#regenerate {
     background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+#regenerate:disabled {
+    background: linear-gradient(45deg, #999, #666);
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+
+#regenerate:disabled:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 .loading {

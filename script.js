@@ -13,7 +13,7 @@ class PetGenerator {
         this.loading = document.getElementById('loading');
         this.resultSection = document.getElementById('resultSection');
         this.resultGrid = document.getElementById('resultGrid');
-        this.regenerateSameBtn = document.getElementById('regenerateSame');
+        this.regenerateBtn = document.getElementById('regenerate');
         this.generateAnotherBtn = document.getElementById('generateAnother');
 
         this.stream = null;
@@ -70,7 +70,7 @@ class PetGenerator {
         this.captureBtn.addEventListener('click', () => this.capturePhoto());
         this.retakeBtn.addEventListener('click', () => this.retakePhoto());
         this.generateBtn.addEventListener('click', () => this.generatePet());
-        this.regenerateSameBtn.addEventListener('click', () => this.regenerateSame());
+        this.regenerateBtn.addEventListener('click', () => this.regenerate());
         this.generateAnotherBtn.addEventListener('click', () => this.reset());
     }
 
@@ -187,45 +187,23 @@ class PetGenerator {
         });
     }
 
-    async regenerateSame() {
+    async regenerate() {
         if (!this.capturedImageData || !this.selectedAnimal) {
-            alert('No previous generation to regenerate from.');
             return;
         }
 
-        // Hide result section and show loading
-        this.resultSection.style.display = 'none';
-        this.loading.style.display = 'block';
+        // Show loading state on regenerate button
+        const originalText = this.regenerateBtn.textContent;
+        this.regenerateBtn.textContent = 'Regenerating...';
+        this.regenerateBtn.disabled = true;
 
         try {
-            const response = await fetch('/generate-pet', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    userImage: this.capturedImageData,
-                    selectedAnimal: this.selectedAnimal
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to generate pet');
-            }
-
-            const result = await response.json();
-            
-            this.loading.style.display = 'none';
-            
-            // Display new images
-            this.displayImageGrid(result.generatedImages);
-            this.resultSection.style.display = 'block';
-
-        } catch (error) {
-            console.error('Error regenerating pet:', error);
-            this.loading.style.display = 'none';
-            this.resultSection.style.display = 'block';
-            alert('Failed to regenerate pet. Please try again.');
+            // Call the existing generatePet method which handles everything
+            await this.generatePet();
+        } finally {
+            // Reset button state
+            this.regenerateBtn.textContent = originalText;
+            this.regenerateBtn.disabled = false;
         }
     }
 
