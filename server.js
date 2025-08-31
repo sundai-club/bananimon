@@ -35,15 +35,17 @@ Style: Cel-shaded cartoon with bold colors, clean outlines, and furry character 
 
 Critical Requirements:
 - Transform THIS PERSON into a furry ${selectedAnimal.name.toLowerCase()} character while keeping their face clearly recognizable
-- Show full body (head to feet) in standing pose with human-like posture
+- Show full body (head to feet) in upright standing pose
 - MUST preserve THIS PERSON'S unique facial features, eye shape, eye color, and facial structure within the furry design
-- Add full ${selectedAnimal.name.toLowerCase()} characteristics: proper animal ears, muzzle/snout, fur covering, tail, paws/hands, and species-appropriate colors
+- Body should be distinctly ${selectedAnimal.name.toLowerCase()}-like: proper animal proportions, body shape, limb structure, and stance
+- Add full ${selectedAnimal.name.toLowerCase()} characteristics: animal ears, muzzle/snout, complete fur covering, tail, paws with paw pads, and species-appropriate anatomy
+- Use ${selectedAnimal.name.toLowerCase()} body proportions and build (thick/thin, muscular/lean, short/tall as appropriate for the species)
+- Include animal-specific body features: chest/torso shape, leg structure, arm/foreleg proportions matching the ${selectedAnimal.name.toLowerCase()}
 - Use bright, vibrant furry character colors with simple cartoon shading
-- Make it clearly THIS PERSON as a furry ${selectedAnimal.name.toLowerCase()} - recognizable face but full animal body features
-- Cute, appealing furry character design that maintains human personality in animal form
-- Include appropriate ${selectedAnimal.name.toLowerCase()} markings, patterns, and physical traits
+- Make it clearly THIS PERSON as a furry ${selectedAnimal.name.toLowerCase()} - recognizable face on proper animal body
+- Include appropriate ${selectedAnimal.name.toLowerCase()} markings, patterns, and physical traits throughout the body
 
-The result should be THIS PERSON transformed into an adorable furry ${selectedAnimal.name.toLowerCase()} character with their recognizable facial identity preserved.`;
+The result should be THIS PERSON's recognizable face on a distinctly ${selectedAnimal.name.toLowerCase()}-shaped anthropomorphic body with full animal characteristics.`;
 
         // Log the prompt to console
         console.log('=== GENERATION PROMPT ===');
