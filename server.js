@@ -29,33 +29,20 @@ app.post('/generate-pet', async (req, res) => {
         const animalImageBuffer = await animalImageResponse.arrayBuffer();
         const animalImageBase64 = Buffer.from(animalImageBuffer).toString('base64');
         
-        const prompt = `Create a cartoon version of the human from Image A as a 5-10 year old child with very subtle ${selectedAnimal.name.toLowerCase()} characteristics from Image B. Output non-photorealistic, cel-shaded render with large readable silhouette, game-ready crop, no logos/IP, consistent likeness, bold color blocks.
+        const prompt = `Create a full-body cartoon character of the person from Image A as a cute child (age 5-10) with subtle ${selectedAnimal.name.toLowerCase()} traits from Image B.
 
-IMPORTANT: This should be 95% human, 5% animal - the person should be clearly recognizable as themselves but as a young child (5-10 years old).
+Style: Cel-shaded cartoon with bold colors, clean outlines, and game-ready character design.
 
-Character design:
-- MAINTAIN the exact facial structure, features, and likeness of the person from Image A
-- Transform them into a 5-10 year old child version of themselves with younger facial features, bigger eyes, rounder face, softer features
-- Keep their human skin tone, eye color, hair color, and core facial identity
-- Add only MINIMAL ${selectedAnimal.name.toLowerCase()} features: subtle ear shape changes, small nose adjustments, or minor markings
-- Use child-like proportions: larger head relative to body, bigger eyes, softer features
-- Keep completely human body proportions appropriate for a young child
+Requirements:
+- Show the full body character (head to feet) in a standing pose
+- Keep the person's face, eyes, hair color, and identity clearly recognizable
+- Transform into a young child with bigger eyes, rounder face, and softer features
+- Add subtle ${selectedAnimal.name.toLowerCase()} characteristics appropriate to that animal (ears, markings, colors, etc.)
+- Use bright, vibrant colors with simple cartoon shading
+- 70% human, 30% animal characteristics
+- Child-like proportions with larger head relative to body
 
-Visual style requirements:
-- Cel-shaded, cartoon anime/manga style rendering
-- Bold, flat color blocks with clean outlines
-- Large, clear silhouette that reads well at small sizes
-- Bright, vibrant colors with good contrast
-- Clean, simple shading without complex textures
-- Game character/avatar aesthetic
-
-Subtle animal touches only:
-- Maybe slightly pointed ear tips (not full animal ears)
-- Small whisker marks or gentle facial markings
-- Minor color accent from the ${selectedAnimal.name.toLowerCase()} (like hair highlights)
-- Keep it so subtle that they still look like the same person
-
-The result should look like the person from the photo as a cute 5-10 year old child cartoon character with barely noticeable ${selectedAnimal.name.toLowerCase()} touches - they should be immediately recognizable as a younger version of themselves.`;
+The result should be an adorable full-body child character with just a hint of ${selectedAnimal.name.toLowerCase()} features.`;
 
         // Log the prompt to console
         console.log('=== GENERATION PROMPT ===');
@@ -142,8 +129,8 @@ function getAnimalImageUrl(animalName) {
         'Hamster': 'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=400&h=400&fit=crop&crop=face',
         'Bird': 'https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=400&h=400&fit=crop&crop=center',
         'Fish': 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=400&h=400&fit=crop&crop=face',
-        'Turtle': 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=400&fit=crop&crop=center',
-        'Frog': 'https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?w=400&h=400&fit=crop&crop=face',
+        'Turtle': 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=400&h=400&fit=crop&crop=center',
+        'Snake': 'https://plus.unsplash.com/premium_photo-1667162417224-b6416612d736?w=400&h=400&fit=crop&crop=center',
         'Fox': 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=400&h=400&fit=crop&crop=face',
         'Panda': 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=400&h=400&fit=crop&crop=face',
         'Koala': 'https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?w=400&h=400&fit=crop&crop=face',
@@ -154,7 +141,7 @@ function getAnimalImageUrl(animalName) {
         'Pig': 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=400&h=400&fit=crop&crop=face',
         'Elephant': 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=400&fit=crop&crop=face',
         'Banana': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop&crop=center',
-        'Octopus': 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=400&fit=crop&crop=center',
+        'Owl': 'https://images.unsplash.com/photo-1553264701-d138db4fd5d4?w=400&h=400&fit=crop&crop=face',
         'Penguin': 'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?w=400&h=400&fit=crop&crop=face'
     };
     

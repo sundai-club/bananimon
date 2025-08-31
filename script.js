@@ -29,8 +29,8 @@ class PetGenerator {
             { name: 'Hamster', image: 'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=200&h=200&fit=crop&crop=face', description: 'Tiny explorer' },
             { name: 'Bird', image: 'https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=200&h=200&fit=crop&crop=center', description: 'Chirpy friend' },
             { name: 'Fish', image: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=200&h=200&fit=crop&crop=face', description: 'Swimming buddy' },
-            { name: 'Turtle', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=200&h=200&fit=crop&crop=center', description: 'Wise crawler' },
-            { name: 'Frog', image: 'https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?w=200&h=200&fit=crop&crop=face', description: 'Jumping joy' },
+            { name: 'Turtle', image: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=200&h=200&fit=crop&crop=center', description: 'Wise crawler' },
+            { name: 'Snake', image: 'https://plus.unsplash.com/premium_photo-1667162417224-b6416612d736?w=200&h=200&fit=crop&crop=center', description: 'Slithery friend' },
             { name: 'Fox', image: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=200&h=200&fit=crop&crop=face', description: 'Clever critter' },
             { name: 'Panda', image: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=200&h=200&fit=crop&crop=face', description: 'Bamboo lover' },
             { name: 'Koala', image: 'https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?w=200&h=200&fit=crop&crop=face', description: 'Tree hugger' },
@@ -41,7 +41,7 @@ class PetGenerator {
             { name: 'Pig', image: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=200&h=200&fit=crop&crop=face', description: 'Happy oinkster' },
             { name: 'Elephant', image: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=200&h=200&fit=crop&crop=face', description: 'Gentle giant' },
             { name: 'Banana', image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop&crop=center', description: 'Yellow friend' },
-            { name: 'Octopus', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=200&h=200&fit=crop&crop=center', description: 'Eight-armed buddy' },
+            { name: 'Owl', image: 'https://images.unsplash.com/photo-1553264701-d138db4fd5d4?w=200&h=200&fit=crop&crop=face', description: 'Wise watcher' },
             { name: 'Penguin', image: 'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?w=200&h=200&fit=crop&crop=face', description: 'Tuxedo dancer' }
         ];
 
