@@ -142,7 +142,7 @@ h2 {
     padding: 20px 10px 10px;
 }
 
-#generatePet, #generateAnother {
+#generatePet, #generateAnother, #regenerateSame {
     display: block;
     margin: 0 auto;
     background: linear-gradient(45deg, #11998e, #38ef7d);
@@ -156,9 +156,21 @@ h2 {
     transition: all 0.3s ease;
 }
 
-#generatePet:hover, #generateAnother:hover {
+#generatePet:hover, #generateAnother:hover, #regenerateSame:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.result-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#regenerateSame {
+    background: linear-gradient(45deg, #667eea, #764ba2);
 }
 
 .loading {

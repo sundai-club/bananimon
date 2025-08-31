@@ -29,23 +29,34 @@ app.post('/generate-pet', async (req, res) => {
         const animalImageBuffer = await animalImageResponse.arrayBuffer();
         const animalImageBase64 = Buffer.from(animalImageBuffer).toString('base64');
         
-        const prompt = `Create a full-body furry anthropomorphic ${selectedAnimal.name.toLowerCase()} character of THIS SPECIFIC PERSON from Image A.
+        const prompt = `Create a full-body semi-furry anthropomorphic ${selectedAnimal.name.toLowerCase()} character of THIS SPECIFIC PERSON from Image A.
 
-Style: Cel-shaded cartoon with bold colors, clean outlines, and furry character design.
+Style: Cel-shaded cartoon with bold colors, clean outlines, and balanced anthro design.
 
 Critical Requirements:
-- Transform THIS PERSON into a furry ${selectedAnimal.name.toLowerCase()} character while keeping their face clearly recognizable
-- Show full body (head to feet) in upright standing pose
-- MUST preserve THIS PERSON'S unique facial features, eye shape, eye color, and facial structure within the furry design
-- Body should be distinctly ${selectedAnimal.name.toLowerCase()}-like: proper animal proportions, body shape, limb structure, and stance
-- Add full ${selectedAnimal.name.toLowerCase()} characteristics: animal ears, muzzle/snout, complete fur covering, tail, paws with paw pads, and species-appropriate anatomy
-- Use ${selectedAnimal.name.toLowerCase()} body proportions and build (thick/thin, muscular/lean, short/tall as appropriate for the species)
-- Include animal-specific body features: chest/torso shape, leg structure, arm/foreleg proportions matching the ${selectedAnimal.name.toLowerCase()}
-- Use bright, vibrant furry character colors with simple cartoon shading
-- Make it clearly THIS PERSON as a furry ${selectedAnimal.name.toLowerCase()} - recognizable face on proper animal body
-- Include appropriate ${selectedAnimal.name.toLowerCase()} markings, patterns, and physical traits throughout the body
+- Transform THIS PERSON into a semi-furry ${selectedAnimal.name.toLowerCase()} while keeping their face clearly recognizable
+- Show full body (head to feet) in upright bipedal standing pose
+- MUST preserve THIS PERSON'S unique facial features, eye shape, eye color, and bone structure
 
-The result should be THIS PERSON's recognizable face on a distinctly ${selectedAnimal.name.toLowerCase()}-shaped anthropomorphic body with full animal characteristics.`;
+FACE/HEAD:
+- Keep human facial structure with THIS PERSON'S recognizable features
+- Add small ${selectedAnimal.name.toLowerCase()} muzzle/snout (subtle, not pronounced)
+- Replace human ears with functional ${selectedAnimal.name.toLowerCase()} ears
+- Maintain human-like eye placement and expression
+
+BODY:
+- Mostly human torso proportions with subtle ${selectedAnimal.name.toLowerCase()} modifications
+- Slight digitigrade leg stance (hint of animal posture)
+- Paw-like hands and feet with visible paw pads
+- Patchy fur coverage on forearms, lower legs, and cheeks
+- Full expressive ${selectedAnimal.name.toLowerCase()} tail that's anatomically integrated
+
+COLORING:
+- ${selectedAnimal.name.toLowerCase()} fur colors and basic markings where fur appears
+- Human skin tone on non-furred areas
+- Bright, vibrant cartoon colors with simple shading
+
+The result should be a balanced semi-furry character - clearly THIS PERSON but with integrated ${selectedAnimal.name.toLowerCase()} features that feel natural, not costume-like.`;
 
         // Log the prompt to console
         console.log('=== GENERATION PROMPT ===');
