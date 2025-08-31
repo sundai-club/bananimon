@@ -29,20 +29,30 @@ app.post('/generate-pet', async (req, res) => {
         const animalImageBuffer = await animalImageResponse.arrayBuffer();
         const animalImageBase64 = Buffer.from(animalImageBuffer).toString('base64');
         
-        const prompt = `Create a photorealistic baby version of the person in the first image with very subtle ${selectedAnimal.name.toLowerCase()} features mixed in. The result should look 90% human and only 10% animal.
+        const prompt = `Fuse subject from Image A (the human selfie) with animal traits from Image B (${selectedAnimal.name.toLowerCase()}). Output non-photorealistic, cel-shaded render with large readable silhouette, game-ready crop, no logos/IP, consistent likeness, bold color blocks.
 
-The result should be:
-- STRONGLY maintain the person's facial structure, bone structure, eye shape, eye color, hair color, and overall human appearance
-- Make them look like a baby/toddler version of themselves (younger, cuter, more innocent)
-- Add only MINIMAL and SUBTLE ${selectedAnimal.name.toLowerCase()} features: slightly pointed ears, very subtle nose changes, or soft fur-like hair texture
-- Keep normal human skin tone and texture - no full fur coverage
-- Maintain completely human hands, human body proportions
-- NO tail, NO animal muzzle, NO dramatic animal transformations
-- Photorealistic style like a high-quality baby photograph
-- Soft, natural lighting with realistic skin tones and textures
-- Should look like this person as a real baby with just tiny adorable animal touches
+Create a stylized cartoon pet character that combines:
+- The facial structure, features, and likeness of the person from Image A
+- Key animal characteristics from the ${selectedAnimal.name.toLowerCase()} in Image B
+- Make it look like a cute, baby/toddler version of the person as a ${selectedAnimal.name.toLowerCase()}
 
-The goal is to make it look like this specific person as a real baby with barely noticeable ${selectedAnimal.name.toLowerCase()} characteristics - not a cartoon or fantasy creature.`;
+Visual style requirements:
+- Cel-shaded, non-photorealistic cartoon rendering
+- Bold, flat color blocks with clean edges
+- Large, clear silhouette that reads well at small sizes
+- Game-ready character design aesthetic
+- Bright, saturated colors
+- Simple but expressive features
+
+Character design:
+- Maintain the person's core facial features and eye color
+- Add prominent ${selectedAnimal.name.toLowerCase()} traits (ears, nose, markings, fur patterns)
+- Cute, chibi-style proportions (large head, small body)
+- Expressive, friendly cartoon eyes
+- No realistic textures - use flat cartoon shading
+- Clean, simple design suitable for mobile games
+
+The result should be a charming cartoon pet character that clearly resembles the person but as a stylized ${selectedAnimal.name.toLowerCase()}.`;
 
         // Log the prompt to console
         console.log('=== GENERATION PROMPT ===');
@@ -116,7 +126,11 @@ function getAnimalImageUrl(animalName) {
         'Lion': 'https://images.unsplash.com/photo-1552410260-0fd9b577afa6?w=400&h=400&fit=crop&crop=face',
         'Tiger': 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=400&h=400&fit=crop&crop=face',
         'Bear': 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?w=400&h=400&fit=crop&crop=center',
-        'Pig': 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=400&h=400&fit=crop&crop=face'
+        'Pig': 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=400&h=400&fit=crop&crop=face',
+        'Elephant': 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=400&fit=crop&crop=face',
+        'Banana': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop&crop=center',
+        'Octopus': 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=400&fit=crop&crop=center',
+        'Penguin': 'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?w=400&h=400&fit=crop&crop=face'
     };
     
     return animalImages[animalName] || animalImages['Cat'];

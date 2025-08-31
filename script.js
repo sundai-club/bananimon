@@ -35,7 +35,11 @@ class PetGenerator {
             { name: 'Lion', image: 'https://images.unsplash.com/photo-1552410260-0fd9b577afa6?w=200&h=200&fit=crop&crop=face', description: 'Brave heart' },
             { name: 'Tiger', image: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=200&h=200&fit=crop&crop=face', description: 'Striped beauty' },
             { name: 'Bear', image: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?w=200&h=200&fit=crop&crop=center', description: 'Cuddly giant' },
-            { name: 'Pig', image: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=200&h=200&fit=crop&crop=face', description: 'Happy oinkster' }
+            { name: 'Pig', image: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=200&h=200&fit=crop&crop=face', description: 'Happy oinkster' },
+            { name: 'Elephant', image: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=200&h=200&fit=crop&crop=face', description: 'Gentle giant' },
+            { name: 'Banana', image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop&crop=center', description: 'Yellow friend' },
+            { name: 'Octopus', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=200&h=200&fit=crop&crop=center', description: 'Eight-armed buddy' },
+            { name: 'Penguin', image: 'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?w=200&h=200&fit=crop&crop=face', description: 'Tuxedo dancer' }
         ];
 
         this.init();
