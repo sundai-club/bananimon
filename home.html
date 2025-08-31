@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bananimon - Home</title>
+    <meta name="description" content="Care for your Bananimon companion. Daily rituals, evolution, and bonding through consistency.">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container home-container">
+        <!-- Home Header -->
+        <div class="home-header">
+            <div class="bananimon-portrait" id="bananimonPortrait">
+                <img id="bananimonImage" alt="Your Bananimon">
+                <div class="evolution-badge" id="evolutionBadge">
+                    <span class="stage-name">Hatchling</span>
+                </div>
+            </div>
+            <div class="bananimon-info">
+                <h1 id="bananimonName">Loading...</h1>
+                <div class="type-info">
+                    <span id="temperament">Calm</span> <span id="animalType">Cat</span>
+                </div>
+                <div class="bond-display">
+                    <span class="bond-icon">💖</span>
+                    <span id="bondValue">3</span>/100
+                    <div class="streak-dots" id="streakDots">
+                        <!-- Streak dots will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Needs Status -->
+        <div class="needs-panel">
+            <h3>Current Needs</h3>
+            <div class="needs-grid">
+                <div class="need-item">
+                    <div class="need-icon">🍎</div>
+                    <div class="need-info">
+                        <span class="need-name">Hunger</span>
+                        <div class="need-bar">
+                            <div class="need-fill hunger-fill" id="hungerFill"></div>
+                        </div>
+                        <span class="need-value" id="hungerValue">85%</span>
+                    </div>
+                </div>
+                <div class="need-item">
+                    <div class="need-icon">😴</div>
+                    <div class="need-info">
+                        <span class="need-name">Rest</span>
+                        <div class="need-bar">
+                            <div class="need-fill rest-fill" id="restFill"></div>
+                        </div>
+                        <span class="need-value" id="restValue">85%</span>
+                    </div>
+                </div>
+                <div class="need-item">
+                    <div class="need-icon">✨</div>
+                    <div class="need-info">
+                        <span class="need-name">Clean</span>
+                        <div class="need-bar">
+                            <div class="need-fill clean-fill" id="cleanFill"></div>
+                        </div>
+                        <span class="need-value" id="cleanValue">85%</span>
+                    </div>
+                </div>
+                <div class="need-item">
+                    <div class="need-icon">😊</div>
+                    <div class="need-info">
+                        <span class="need-name">Mood</span>
+                        <div class="need-bar">
+                            <div class="need-fill mood-fill" id="moodFill"></div>
+                        </div>
+                        <span class="need-value" id="moodValue">85%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Ritual Card -->
+        <div class="daily-ritual-card" id="dailyRitualCard">
+            <div class="ritual-header">
+                <h3>Daily Ritual</h3>
+                <p class="ritual-subtitle">Feed • Groom • Train (2 min)</p>
+            </div>
+            <div class="ritual-actions">
+                <button class="ritual-button" id="feedBtn" data-action="feed">
+                    <span class="ritual-icon">🍎</span>
+                    <span class="ritual-name">Feed</span>
+                    <span class="ritual-status" id="feedStatus">Ready</span>
+                </button>
+                <button class="ritual-button" id="groomBtn" data-action="groom">
+                    <span class="ritual-icon">✨</span>
+                    <span class="ritual-name">Groom</span>
+                    <span class="ritual-status" id="groomStatus">Ready</span>
+                </button>
+                <button class="ritual-button" id="trainBtn" data-action="train">
+                    <span class="ritual-icon">💪</span>
+                    <span class="ritual-name">Train</span>
+                    <span class="ritual-status" id="trainStatus">Ready</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Daily Quests -->
+        <div class="quests-section">
+            <h3>Today's Goals</h3>
+            <div id="questsList" class="quests-list">
+                <!-- Quests will be populated here -->
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="action-button secondary" id="restScheduleBtn">
+                <span class="button-icon">😴</span>
+                <span>Rest Schedule</span>
+            </button>
+            <button class="action-button primary" id="playBoutBtn">
+                <span class="button-icon">⚡</span>
+                <span>Try-Out Bout</span>
+            </button>
+        </div>
+
+        <!-- Coach Messages -->
+        <div class="coach-bubble" id="coachBubble" style="display: none;">
+            <div class="coach-avatar">👨‍🏫</div>
+            <div class="coach-message" id="coachMessage"></div>
+        </div>
+    </div>
+
+    <!-- Care Mini-Game Modal -->
+    <div class="modal-overlay" id="careModal" style="display: none;">
+        <div class="care-modal">
+            <div class="modal-header">
+                <h3 id="careTitle">Feeding Time</h3>
+                <button class="close-button" id="closeCareModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Feed Game -->
+                <div class="care-game feed-game" id="feedGame" style="display: none;">
+                    <div class="game-instructions">
+                        <p>Tap when the ring meets the target!</p>
+                    </div>
+                    <div class="feed-interface">
+                        <div class="feed-bowl">
+                            <div class="pulse-ring" id="pulseRing"></div>
+                            <div class="target-ring"></div>
+                            <div class="bowl-icon">🥣</div>
+                        </div>
+                    </div>
+                    <div class="game-progress">
+                        <span>Progress: <span id="feedProgress">0</span>/6</span>
+                        <span>Score: <span id="feedScore">0</span></span>
+                    </div>
+                </div>
+
+                <!-- Groom Game -->
+                <div class="care-game groom-game" id="groomGame" style="display: none;">
+                    <div class="game-instructions">
+                        <p>Trace the highlighted areas to groom!</p>
+                    </div>
+                    <div class="groom-interface">
+                        <div class="groom-target" id="groomTarget">
+                            <svg class="groom-svg" viewBox="0 0 200 200">
+                                <path id="groomPath" d="M 50,100 Q 100,50 150,100" stroke="#FFD700" stroke-width="4" fill="none"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="game-progress">
+                        <span>Completed: <span id="groomProgress">0</span>/2</span>
+                    </div>
+                </div>
+
+                <!-- Train Game -->
+                <div class="care-game train-game" id="trainGame" style="display: none;">
+                    <div class="game-instructions">
+                        <p>Tap when the target flashes!</p>
+                    </div>
+                    <div class="train-interface">
+                        <div class="train-target" id="trainTarget">
+                            <div class="target-circle"></div>
+                        </div>
+                    </div>
+                    <div class="game-progress">
+                        <span>Reps: <span id="trainProgress">0</span>/10</span>
+                        <span>Hits: <span id="trainHits">0</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="game-result" id="gameResult" style="display: none;">
+                    <div class="result-message" id="resultMessage"></div>
+                    <button class="primary-button" id="continueBtn">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rest Schedule Modal -->
+    <div class="modal-overlay" id="restModal" style="display: none;">
+        <div class="rest-modal">
+            <div class="modal-header">
+                <h3>Rest Schedule</h3>
+                <button class="close-button" id="closeRestModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Choose a quiet hour for better rest efficiency:</p>
+                <div class="time-selector">
+                    <select id="restHourSelect" class="time-input">
+                        <option value="22">10:00 PM - 11:00 PM</option>
+                        <option value="23">11:00 PM - 12:00 AM</option>
+                        <option value="0">12:00 AM - 1:00 AM</option>
+                        <option value="1">1:00 AM - 2:00 AM</option>
+                        <option value="2">2:00 AM - 3:00 AM</option>
+                        <option value="21">9:00 PM - 10:00 PM</option>
+                        <option value="20">8:00 PM - 9:00 PM</option>
+                    </select>
+                </div>
+                <div class="rest-info">
+                    <p>💡 We'll nap more efficiently if you're offline during this time.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="primary-button" id="saveRestSchedule">Save Schedule</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Evolution Modal -->
+    <div class="modal-overlay" id="evolutionModal" style="display: none;">
+        <div class="evolution-modal">
+            <div class="evolution-content">
+                <div class="evolution-animation">
+                    <div class="evolution-glow"></div>
+                    <img id="evolutionImage" class="evolution-bananimon">
+                </div>
+                <h2 id="evolutionTitle">Evolution!</h2>
+                <p id="evolutionMessage">Because you showed up, we grew together.</p>
+                <div class="evolution-details">
+                    <div class="stage-info">
+                        <span class="new-stage" id="newStageName">Juvenile</span>
+                        <span class="stage-description" id="stageDescription">Growing stronger through care</span>
+                    </div>
+                </div>
+                <button class="primary-button" id="celebrateBtn">Amazing!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p id="loadingText">Loading your Bananimon...</p>
+    </div>
+
+    <script src="home.js"></script>
+</body>
+</html>

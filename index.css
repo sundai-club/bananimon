@@ -1,0 +1,439 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 2.5rem;
+    margin: 0;
+    flex: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.beta-button {
+    background: linear-gradient(45deg, #11998e, #38ef7d);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.beta-button:hover {
+    transform: translateY(-50%) translateY(-2px);
+    box-shadow: 0 6px 20px rgba(17, 153, 142, 0.4);
+}
+
+h2 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.camera-section, .animal-section, .generate-section, .result-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.generate-section {
+    text-align: center;
+}
+
+.camera-section h2, .animal-section h2, .result-section h2 {
+    color: #333;
+}
+
+#camera {
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    display: block;
+    margin: 0 auto;
+    border: 3px solid #667eea;
+}
+
+.camera-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.camera-controls button {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.camera-controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.captured-photo {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#selfiePreview {
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 3px solid #667eea;
+}
+
+.animal-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.animal-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    overflow: hidden;
+}
+
+.animal-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.animal-card.selected {
+    border-color: #667eea;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
+}
+
+.age-slider-section {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.age-slider-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.slider-container label {
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    min-width: 30px;
+}
+
+.age-slider {
+    flex: 1;
+    max-width: 400px;
+    height: 8px;
+    border-radius: 5px;
+    background: rgba(155, 155, 155, 0.3);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.age-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.age-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.age-display {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.age-display span {
+    color: #11998e;
+    font-size: 20px;
+}
+
+.animal-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+.animal-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    padding: 20px 10px 10px;
+}
+
+#generatePet, #generateAnother, #regenerate {
+    display: block;
+    margin: 0 auto;
+    background: linear-gradient(45deg, #11998e, #38ef7d);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#generatePet:hover, #generateAnother:hover, #regenerate:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.result-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#regenerate {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+#regenerate:disabled {
+    background: linear-gradient(45deg, #999, #666);
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+
+#regenerate:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading p {
+    color: #667eea;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.result-image {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#resultImage {
+    width: 100%;
+    max-width: 600px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid #667eea;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.result-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.result-option {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 0;
+    }
+    
+    .beta-button {
+        position: static;
+        transform: none;
+        align-self: center;
+    }
+    
+    .beta-button:hover {
+        transform: translateY(-2px);
+    }
+
+    .animal-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0px;
+    }
+
+    .animal-image {
+        height: 120px;
+    }
+
+    .animal-name {
+        font-size: 12px;
+        padding: 15px 8px 8px;
+    }
+
+    #camera, #selfiePreview {
+        height: 300px;
+    }
+
+    .camera-section, .animal-section, .generate-section, .result-section {
+        padding: 20px;
+    }
+
+    .result-grid {
+        gap: 15px;
+    }
+
+    .result-option {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .animal-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0px;
+    }
+
+    .animal-image {
+        height: 100px;
+    }
+
+    .animal-name {
+        font-size: 10px;
+        padding: 12px 6px 6px;
+    }
+
+    .camera-controls button {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 5px;
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .result-option {
+        height: 250px;
+    }
+}

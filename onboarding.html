@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bananimon - Create Your Spirit Animal</title>
+    <meta name="description" content="Create a Bananimon that's part you, part spirit-animal. A caring game where consistency drives evolution.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bananimon - Create Your Spirit Animal">
+    <meta property="og:description" content="Create a Bananimon that's part you, part spirit-animal. A caring game where consistency drives evolution.">
+    <meta property="og:image" content="/og-image.png">
+    <meta property="og:url" content="https://bananimon.onrender.com">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bananimon - Create Your Spirit Animal">
+    <meta name="twitter:description" content="Create a Bananimon that's part you, part spirit-animal. A caring game where consistency drives evolution.">
+    <meta name="twitter:image" content="/og-image.png">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Splash Screen -->
+        <div id="splash" class="onboarding-screen active">
+            <div class="logo-section">
+                <div class="logo">🍌</div>
+                <h1>Bananimon</h1>
+                <p class="tagline">Make a Bananimon that's part you, part spirit-animal.</p>
+            </div>
+            <div class="action-section">
+                <button id="beginBtn" class="primary-button">Begin</button>
+                <a href="#" class="secondary-link" id="privacyLink">Privacy</a>
+            </div>
+        </div>
+
+        <!-- Age Gate Screen -->
+        <div id="ageGate" class="onboarding-screen">
+            <div class="content-section">
+                <h2>Age Verification</h2>
+                <p>Please confirm your age to continue</p>
+            </div>
+            <div class="action-section">
+                <button id="over13Btn" class="primary-button">I am 13+</button>
+                <button id="under13Btn" class="secondary-button">I am under 13</button>
+            </div>
+        </div>
+
+        <!-- Under 13 Exit Screen -->
+        <div id="under13Exit" class="onboarding-screen">
+            <div class="content-section">
+                <h2>Sorry!</h2>
+                <p>Bananimon is currently only available for users 13 and older.</p>
+                <p>Check back when you're older!</p>
+            </div>
+        </div>
+
+        <!-- Consent Screen -->
+        <div id="consent" class="onboarding-screen">
+            <div class="content-section">
+                <h2>Camera & Privacy</h2>
+                <div class="info-points">
+                    <div class="info-point">
+                        <span class="icon">📸</span>
+                        <p>We use your selfie only to generate a stylized creature.</p>
+                    </div>
+                    <div class="info-point">
+                        <span class="icon">🗑️</span>
+                        <p>Your original selfie is deleted by default.</p>
+                    </div>
+                </div>
+                <div class="consent-checkbox">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="agreeCheckbox">
+                        <span class="checkmark"></span>
+                        I agree to the policy
+                    </label>
+                </div>
+                <a href="#" class="learn-more" id="learnMoreLink">Learn more</a>
+            </div>
+            <div class="action-section">
+                <button id="continueBtn" class="primary-button" disabled>Continue</button>
+            </div>
+        </div>
+
+        <!-- Fast Account Screen -->
+        <div id="fastAccount" class="onboarding-screen">
+            <div class="content-section">
+                <h2>Get Started</h2>
+                <p>Create your Bananimon instantly!</p>
+            </div>
+            <div class="action-section">
+                <button id="createAnonymousBtn" class="primary-button">Create without an account</button>
+                <button id="linkEmailBtn" class="secondary-button">Link email (optional)</button>
+            </div>
+        </div>
+
+        <!-- Email Link Screen -->
+        <div id="emailLink" class="onboarding-screen">
+            <div class="content-section">
+                <h2>Link Your Email</h2>
+                <p>Save your Bananimon and sync across devices</p>
+                <div class="input-group">
+                    <input type="email" id="emailInput" placeholder="Enter your email" class="text-input">
+                </div>
+            </div>
+            <div class="action-section">
+                <button id="saveEmailBtn" class="primary-button">Save & Continue</button>
+                <button id="skipEmailBtn" class="secondary-button">Skip for now</button>
+            </div>
+        </div>
+
+        <!-- Selfie Capture Screen -->
+        <div id="selfieCapture" class="onboarding-screen">
+            <div class="content-section">
+                <h2>Capture Your Essence</h2>
+                <div class="camera-container">
+                    <video id="camera" autoplay></video>
+                    <canvas id="canvas" style="display: none;"></canvas>
+                    <div class="camera-overlay">
+                        <div class="face-guide"></div>
+                    </div>
+                    <div class="camera-tips">
+                        <p>💡 Face the light • No hats if possible</p>
+                    </div>
+                </div>
+                <div class="captured-photo" id="capturedPhoto" style="display: none;">
+                    <img id="selfiePreview" alt="Your selfie">
+                    <div class="photo-status">
+                        <span class="status-icon">✨</span>
+                        <span>Looks good!</span>
+                    </div>
+                </div>
+            </div>
+            <div class="action-section">
+                <button id="startCameraBtn" class="primary-button">Start Camera</button>
+                <button id="captureBtn" class="primary-button" style="display: none;">Capture</button>
+                <button id="retakeBtn" class="secondary-button" style="display: none;">Retake</button>
+            </div>
+        </div>
+
+        <!-- Animal Selection Screen -->
+        <div id="animalSelection" class="onboarding-screen">
+            <div class="content-section">
+                <h2>Choose Your Spirit Animal</h2>
+                <div class="animal-grid" id="animalGrid">
+                    <!-- Animals will be populated here -->
+                </div>
+                <div class="search-section">
+                    <input type="text" id="animalSearch" placeholder="Search animals..." class="text-input">
+                </div>
+            </div>
+        </div>
+
+        <!-- Banana Fusion Preview Screen -->
+        <div id="bananaFusion" class="onboarding-screen">
+            <div class="content-section">
+                <h2>Banana Fusion</h2>
+                <div class="fusion-progress" id="fusionProgress">
+                    <div class="banana-animation">🍌</div>
+                    <p class="fusion-text">Peeling pixels...</p>
+                    <div class="progress-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+                
+                <div class="preview-grid" id="previewGrid" style="display: none;">
+                    <!-- Generated previews will appear here -->
+                </div>
+            </div>
+            <div class="action-section">
+                <button id="remixBtn" class="secondary-button" style="display: none;">Remix</button>
+            </div>
+        </div>
+
+        <!-- Name & Temperament Screen -->
+        <div id="nameTemperament" class="onboarding-screen">
+            <div class="content-section">
+                <h2>Name Your Bananimon</h2>
+                <div class="selected-preview" id="selectedPreview">
+                    <!-- Selected Bananimon image will appear here -->
+                </div>
+                <div class="input-group">
+                    <input type="text" id="nameInput" placeholder="Enter a name" class="text-input">
+                    <button id="diceBtn" class="dice-button">🎲</button>
+                </div>
+                <div class="suggestion-names" id="suggestionNames"></div>
+                
+                <h3>Temperament</h3>
+                <div class="temperament-selector">
+                    <button class="temperament-option selected" data-temperament="Calm">
+                        <span class="temperament-icon">😌</span>
+                        <span>Calm</span>
+                        <div class="tooltip">Steady growth, reliable</div>
+                    </button>
+                    <button class="temperament-option" data-temperament="Spirited">
+                        <span class="temperament-icon">⚡</span>
+                        <span>Spirited</span>
+                        <div class="tooltip">Quick learner, energetic</div>
+                    </button>
+                    <button class="temperament-option" data-temperament="Stoic">
+                        <span class="temperament-icon">🗿</span>
+                        <span>Stoic</span>
+                        <div class="tooltip">Patient, thoughtful</div>
+                    </button>
+                </div>
+            </div>
+            <div class="action-section">
+                <button id="confirmCreationBtn" class="primary-button" disabled>Create My Bananimon!</button>
+            </div>
+        </div>
+
+        <!-- Creation Success Screen -->
+        <div id="creationSuccess" class="onboarding-screen">
+            <div class="content-section">
+                <div class="success-animation">
+                    <div class="confetti">🎉</div>
+                    <div class="your-bananimon" id="yourBananimon">
+                        <!-- Final Bananimon will appear here -->
+                    </div>
+                </div>
+                <h2 id="welcomeMessage">Welcome, [Name]!</h2>
+                <p class="success-message">Your Bananimon is ready for care and adventure.</p>
+            </div>
+            <div class="action-section">
+                <button id="startCaringBtn" class="primary-button">Start Caring</button>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+            <div class="spinner"></div>
+            <p id="loadingText">Creating your magical companion...</p>
+        </div>
+    </div>
+
+    <script src="onboarding.js"></script>
+</body>
+</html>
