@@ -209,12 +209,12 @@ app.post('/api/rest-schedule', async (req, res) => {
 });
 
 // Legacy endpoints for backwards compatibility
-app.post('/generate-pet', (req, res) => {
+app.post('/generate-pet', async (req, res) => {
     const promptType = req.body.promptType || 'bananimon'; // Default to 'bananimon' if not specified
     const serverPromptType = promptType === 'bananimon' ? 'simple' : 'regular';
-    generateBananimonImages(req, res, 4, serverPromptType);
+    await generateBananimonImages(req, res, 4, serverPromptType);
 });
-app.post('/api/generate-bananimon', (req, res) => generateBananimonImages(req, res, 3, 'detailed')); // Generate 3 for onboarding with detailed prompt
+app.post('/api/generate-bananimon', async (req, res) => await generateBananimonImages(req, res, 3, 'detailed')); // Generate 3 for onboarding with detailed prompt
 
 async function generateBananimonImages(req, res, numImages = 3, promptType = 'detailed') {
     try {
