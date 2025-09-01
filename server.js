@@ -209,10 +209,10 @@ app.post('/api/rest-schedule', async (req, res) => {
 });
 
 // Legacy endpoints for backwards compatibility
-app.post('/generate-pet', (req, res) => generateBananimonImages(req, res, 4)); // Generate 4 for legacy
-app.post('/api/generate-bananimon', (req, res) => generateBananimonImages(req, res, 3)); // Generate 3 for onboarding
+app.post('/generate-pet', (req, res) => generateBananimonImages(req, res, 4, 'simple')); // Generate 4 for legacy with simple prompt
+app.post('/api/generate-bananimon', (req, res) => generateBananimonImages(req, res, 3, 'detailed')); // Generate 3 for onboarding with detailed prompt
 
-async function generateBananimonImages(req, res, numImages = 3) {
+async function generateBananimonImages(req, res, numImages = 3, promptType = 'detailed') {
     try {
         const { userImage, selectedAnimal, selectedAge } = req.body;
         
@@ -229,7 +229,9 @@ async function generateBananimonImages(req, res, numImages = 3) {
         const animalImageBuffer = await animalImageResponse.arrayBuffer();
         const animalImageBase64 = Buffer.from(animalImageBuffer).toString('base64');
         
-        const prompt = createBananimonPrompt(selectedAnimal.name.toLowerCase(), age);
+        const prompt = promptType === 'simple' 
+            ? createSimpleBananimonPrompt(selectedAnimal.name.toLowerCase(), age)
+            : createBananimonPrompt(selectedAnimal.name.toLowerCase(), age);
 
         console.log('🍌 Starting Bananimon generation...');
         console.log(`Creating ${selectedAnimal.name} character for ${age}-year-old`);
@@ -335,6 +337,42 @@ COLORING & STYLE:
 - Include subtle magical elements that suggest growth potential through care
 
 The result should be a balanced semi-furry child character - clearly THIS PERSON as a ${age}-year-old of the same gender but with integrated ${animalType} features that feel natural and invite caring interaction.`;
+}
+
+function createSimpleBananimonPrompt(animalType, age) {
+    return `Create a full-body semi-furry anthropomorphic ${animalType} character of THIS SPECIFIC PERSON from Image A as a ${age}-year-old child.
+
+Style: Cel-shaded cartoon with bold colors, clean outlines, and balanced anthro design.
+
+Critical Requirements:
+- Transform THIS PERSON into a ${age}-year-old semi-furry ${animalType} while keeping their face clearly recognizable
+- Show full body (head to feet) in upright bipedal standing pose
+- MUST preserve THIS PERSON'S unique facial features, eye shape, eye color, and bone structure but make them look younger
+- MUST maintain the same gender as the person in the photo - analyze the person's gender and keep it consistent in the character
+
+FACE/HEAD (${age}-year-old version):
+- Keep THIS PERSON'S recognizable facial features but make them look like a ${age}-year-old child
+- Maintain the same gender characteristics as the original person (masculine or feminine features)
+- Softer, more youthful facial features with larger eyes and rounder face
+- Add small ${animalType} muzzle/snout (subtle, not pronounced)
+- Replace human ears with functional ${animalType} ears
+- Maintain human-like eye placement and expression but with childlike characteristics
+
+BODY (child proportions):
+- Child body proportions - smaller and more petite than adult with larger head relative to body
+- Body shape should reflect the same gender as the person in the photo
+- Mostly human torso with subtle ${animalType} modifications
+- Slight digitigrade leg stance (hint of animal posture)
+- Paw-like hands and feet with visible paw pads
+- Patchy fur coverage on forearms, lower legs, and cheeks
+- Full expressive ${animalType} tail that's anatomically integrated
+
+COLORING:
+- ${animalType} fur colors and basic markings where fur appears
+- Human skin tone on non-furred areas
+- Bright, vibrant cartoon colors with simple shading
+
+The result should be a balanced semi-furry child character - clearly THIS PERSON as a ${age}-year-old of the same gender but with integrated ${animalType} features that feel natural, not costume-like.`;
 }
 
 function getAnimalImageUrl(animalName) {
