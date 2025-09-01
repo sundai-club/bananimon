@@ -22,6 +22,7 @@ class PetGenerator {
         this.capturedImageData = null;
         this.selectedAnimal = null;
         this.selectedAge = 10;
+        this.selectedPromptType = 'bananimon';
 
         this.animals = [
             { name: 'Cat', image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&h=200&fit=crop&crop=face', description: 'Playful feline' },
@@ -76,6 +77,11 @@ class PetGenerator {
         this.regenerateBtn.addEventListener('click', () => this.regenerate());
         this.generateAnotherBtn.addEventListener('click', () => this.reset());
         this.ageSlider.addEventListener('input', () => this.updateAge());
+        
+        // Prompt type toggle
+        document.querySelectorAll('input[name="promptType"]').forEach(radio => {
+            radio.addEventListener('change', (e) => this.updatePromptType(e.target.value));
+        });
     }
 
     async startCamera() {
@@ -138,6 +144,11 @@ class PetGenerator {
         this.ageValue.textContent = this.selectedAge;
     }
 
+    updatePromptType(promptType) {
+        this.selectedPromptType = promptType;
+        console.log(`Prompt type changed to: ${promptType}`);
+    }
+
     checkIfReadyToGenerate() {
         if (this.capturedImageData && this.selectedAnimal) {
             this.generateBtn.style.display = 'inline-block';
@@ -157,7 +168,8 @@ class PetGenerator {
                 body: JSON.stringify({
                     userImage: this.capturedImageData,
                     selectedAnimal: this.selectedAnimal,
-                    selectedAge: this.selectedAge
+                    selectedAge: this.selectedAge,
+                    promptType: this.selectedPromptType
                 })
             });
 
@@ -221,8 +233,12 @@ class PetGenerator {
         this.capturedImageData = null;
         this.selectedAnimal = null;
         this.selectedAge = 10;
+        this.selectedPromptType = 'bananimon';
         this.ageSlider.value = 10;
         this.ageValue.textContent = '10';
+        
+        // Reset prompt type to default
+        document.querySelector('input[name="promptType"][value="bananimon"]').checked = true;
         
         // Reset to initial state - camera section, animal section, and generate section visible
         document.querySelector('.camera-section').style.display = 'block';

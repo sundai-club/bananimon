@@ -209,7 +209,11 @@ app.post('/api/rest-schedule', async (req, res) => {
 });
 
 // Legacy endpoints for backwards compatibility
-app.post('/generate-pet', (req, res) => generateBananimonImages(req, res, 4, 'simple')); // Generate 4 for legacy with simple prompt
+app.post('/generate-pet', (req, res) => {
+    const promptType = req.body.promptType || 'bananimon'; // Default to 'bananimon' if not specified
+    const serverPromptType = promptType === 'bananimon' ? 'simple' : 'regular';
+    generateBananimonImages(req, res, 4, serverPromptType);
+});
 app.post('/api/generate-bananimon', (req, res) => generateBananimonImages(req, res, 3, 'detailed')); // Generate 3 for onboarding with detailed prompt
 
 async function generateBananimonImages(req, res, numImages = 3, promptType = 'detailed') {
@@ -229,9 +233,11 @@ async function generateBananimonImages(req, res, numImages = 3, promptType = 'de
         const animalImageBuffer = await animalImageResponse.arrayBuffer();
         const animalImageBase64 = Buffer.from(animalImageBuffer).toString('base64');
         
-        const prompt = promptType === 'simple' 
+        const prompt = promptType === 'detailed' 
+            ? createBananimonPrompt(selectedAnimal.name.toLowerCase(), age)
+            : promptType === 'simple'
             ? createSimpleBananimonPrompt(selectedAnimal.name.toLowerCase(), age)
-            : createBananimonPrompt(selectedAnimal.name.toLowerCase(), age);
+            : createRegularPrompt(selectedAnimal.name.toLowerCase(), age);
 
         console.log('🍌 Starting Bananimon generation...');
         console.log(`Creating ${selectedAnimal.name} character for ${age}-year-old`);
@@ -373,6 +379,22 @@ COLORING:
 - Bright, vibrant cartoon colors with simple shading
 
 The result should be a balanced semi-furry child character - clearly THIS PERSON as a ${age}-year-old of the same gender but with integrated ${animalType} features that feel natural, not costume-like.`;
+}
+
+function createRegularPrompt(animalType, age) {
+    return `Create a character that combines the person from Image A with ${animalType} characteristics, aged ${age} years old.
+
+Style: Cartoon-style illustration with clean lines and bright colors.
+
+Requirements:
+- Maintain the person's recognizable facial features 
+- Keep the same gender as the original person
+- Age the person to ${age} years old with appropriate proportions
+- Add ${animalType} elements (ears, tail, maybe paws)
+- Full body standing pose
+- Fun and colorful cartoon aesthetic
+
+Make it look like a fusion between the person and the ${animalType}, suitable for a character creator or avatar system.`;
 }
 
 function getAnimalImageUrl(animalName) {
