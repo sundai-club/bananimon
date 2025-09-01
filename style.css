@@ -228,6 +228,10 @@ h3 {
 .camera-container {
     position: relative;
     margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 #camera {
@@ -236,7 +240,8 @@ h3 {
     height: 300px;
     object-fit: cover;
     border-radius: 15px;
-    border: 3px solid #667eea;
+    border: 3px solid transparent;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .camera-overlay {
@@ -254,18 +259,30 @@ h3 {
 .face-guide {
     width: 200px;
     height: 250px;
-    border: 3px dashed rgba(255, 255, 255, 0.8);
+    border: 2px dashed rgba(255, 255, 255, 0.6);
     border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.9; }
 }
 
 .camera-tips {
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 14px;
     color: #666;
+    text-align: center;
+    width: 100%;
 }
 
 .captured-photo {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 #selfiePreview {
@@ -274,7 +291,8 @@ h3 {
     height: 300px;
     object-fit: cover;
     border-radius: 15px;
-    border: 3px solid #11998e;
+    border: 3px solid transparent;
+    box-shadow: 0 4px 12px rgba(17, 153, 142, 0.3);
 }
 
 .photo-status {
